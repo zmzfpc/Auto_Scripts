@@ -60,7 +60,7 @@ for notebook in ipynb_list:
 
 
     for i in range(len(data['cells'])):
-        if data['cells'][i]['cell_type'] == 'markdown':
+        if data['cells'][i]['cell_type'] == 'markdown' or data['cells'][i]['cell_type'] == 'code':
             md_list = []
             py_list = []
             count = 0
