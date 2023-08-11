@@ -80,9 +80,10 @@ for notebook in ipynb_list:
             strings = ''
             for string in data['cells'][i]['source']:
                 strings+=string.lower() 
-
-            if 'solution:' not in strings and 'question' not in strings:
+            # and 'question' not in strings
+            if ('solution:' not in strings and 'question' not in strings) or 'statement' in strings:
                 SRS_Cell.append(data['cells'][i])
+                # print(i, strings)
                 if 'load data' in strings:
                     SH_Cell.append(data['cells'][i])
                 # SRS_Cell.append(data['cells'][i])
@@ -116,7 +117,7 @@ for notebook in ipynb_list:
                         strings = ''
                         for string in data['cells'][i+1]['source']:
                             strings+=string.lower() 
-                    while i+1 < len(data['cells']) and (data['cells'][i+1]['cell_type'] == 'code' or 'solution' in strings):
+                    while i+1 < len(data['cells']) and (data['cells'][i+1]['cell_type'] == 'code' or 'solution' not in strings):
                         SRS_Cell.append(data['cells'][i+1])
                         i+=1 
                         if i+1 < len(data['cells']):
