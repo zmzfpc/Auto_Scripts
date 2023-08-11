@@ -95,9 +95,11 @@ for notebook in ipynb_list:
                 title = title.split('q')[1].split('.')[0]
                 if title not in d:
                     SH_Cell.append(data['cells'][i])
-                    strings = ''
-                    for string in data['cells'][i+1]['source']:
-                        strings+=string.lower() 
+                    if i+1 < len(data['cells']):
+                    
+                        strings = ''
+                        for string in data['cells'][i+1]['source']:
+                            strings+=string.lower() 
                     # print(strings)
                     while i+1 < len(data['cells']) and (data['cells'][i+1]['cell_type'] == 'code' or 'solution' not in strings):
                         SH_Cell.append(data['cells'][i+1])
@@ -110,9 +112,10 @@ for notebook in ipynb_list:
                     d[title] = True
                 else:
                     SRS_Cell.append(data['cells'][i])
-                    strings = ''
-                    for string in data['cells'][i+1]['source']:
-                        strings+=string.lower() 
+                    if i+1 < len(data['cells']):
+                        strings = ''
+                        for string in data['cells'][i+1]['source']:
+                            strings+=string.lower() 
                     while i+1 < len(data['cells']) and (data['cells'][i+1]['cell_type'] == 'code' or 'solution' in strings):
                         SRS_Cell.append(data['cells'][i+1])
                         i+=1 
